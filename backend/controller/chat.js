@@ -4,7 +4,7 @@ const User = require('../models/user'); // Assuming User model is in user.js
 const crypto = require('crypto');
 
 // Create a new chat room
-exports.createChatRoom = async (req, res) => {
+const createChatRoom = async (req, res) => {
     try {
         // Assuming req.user is populated by authentication middleware
         if (!req.user) {
@@ -26,7 +26,7 @@ exports.createChatRoom = async (req, res) => {
 };
 
 // Join a chat room
-exports.joinChatRoom = async (req, res) => {
+const joinChatRoom = async (req, res) => {
     try {
         const { token } = req.body;
         if (!token) {
@@ -45,7 +45,7 @@ exports.joinChatRoom = async (req, res) => {
 };
 
 // Get chat messages for a room
-exports.getChatMessages = async (req, res) => {
+const getChatMessages = async (req, res) => {
     try {
         const { roomId } = req.params;
         if (!roomId) {
@@ -63,7 +63,7 @@ exports.getChatMessages = async (req, res) => {
 };
 
 // Post a new chat message
-exports.postChatMessage = async (req, res) => {
+const postChatMessage = async (req, res) => {
     try {
         const { roomId } = req.params;
         const { message } = req.body;
@@ -89,4 +89,11 @@ exports.postChatMessage = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Error posting message', error: error.message });
     }
+};
+
+module.exports = {
+    createChatRoom,
+    joinChatRoom,
+    getChatMessages,
+    postChatMessage
 };
