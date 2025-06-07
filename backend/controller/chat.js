@@ -28,18 +28,14 @@ const createChatRoom = async (req, res) => {
 };
 
 // Join a chat room
-const enterChatRoom = async (req, res) => {
-    console.log("enterChatRoom CALLED (intermediate version)");
+const enterChatRoom = (req, res) => { // Removed async
+    console.log("enterChatRoom CALLED (synchronous test)");
     const { token } = req.body;
     if (!token) {
-        return res.status(400).json({ message: 'Token is required (intermediate version)' });
+        res.status(400).json({ message: 'Token is required (synchronous test)' });
+        return;
     }
-    // Temporarily comment out DB interaction
-    // const room = await ChatRoom.findOne({ token: token });
-    // if (!room) {
-    //     return res.status(404).json({ message: 'Chat room not found (intermediate version)' });
-    // }
-    res.status(200).json({ message: 'Successfully hit enterChatRoom (intermediate version)', receivedToken: token });
+    res.status(200).json({ message: 'Successfully hit enterChatRoom (synchronous test)', receivedToken: token });
 };
 
 // Get chat messages for a room
