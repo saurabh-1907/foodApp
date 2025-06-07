@@ -13,6 +13,7 @@ app.use(express.static("public"))
 
 app.use("/",require("./routes/user"))
 app.use("/recipe",require("./routes/recipe"))
+app.use("/api/chat",require("./routes/chat")) // Added chat routes
 
 app.listen(PORT,(err)=>{
     console.log(`app is listening on port ${PORT}`)

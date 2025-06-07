@@ -43,8 +43,8 @@ export default function RecipeItems() {
                         return (
                             <div key={index} className='card' onDoubleClick={()=>navigate(`/recipe/${item._id}`)}>
                                 {item.coverImage ?
-                                    <img src={item.coverImage} width="120px" height="100px" alt={item.title} /> :
-                                    <img src={foodImg} width="120px" height="100px" alt="Default recipe image" />
+                                    <img src={item.coverImage} width="200px" height="160px" alt={item.title} /> :
+                                    <img src={foodImg} width="200px" height="160px" alt="Default recipe image" />
                                 }
                                 <div className='card-body'>
                                     <div className='title'>{item.title}</div>
