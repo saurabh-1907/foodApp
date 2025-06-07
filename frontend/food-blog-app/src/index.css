@@ -1,25 +1,33 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; /* Keep existing */
+  line-height: 1.5; /* Keep existing */
+  font-weight: 400; /* Keep existing */
 
-  /* color-scheme: light dark; Removed */
-  color: #333333; /* New primary text color */
-  background-color: #F7F9F9; /* New main background color */
+  /* New CSS Color Variables */
+  --primary-color: #7F55B1;       /* Deep purple */
+  --secondary-color: #9B7EBD;     /* Medium purple */
+  --accent-pink: #F49BAB;         /* Soft pink */
+  --background-light: #FFE1E0;    /* Very light pink/lavender blush */
+  --text-on-dark: #FFFFFF;        /* White */
+  --text-on-light: #333333;       /* Dark grey/black */
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* Updated default background and text colors */
+  color: var(--text-on-light);
+  background-color: var(--background-light);
+
+  font-synthesis: none; /* Keep existing */
+  text-rendering: optimizeLegibility; /* Keep existing */
+  -webkit-font-smoothing: antialiased; /* Keep existing */
+  -moz-osx-font-smoothing: grayscale; /* Keep existing */
 }
 
 a {
   font-weight: 500;
-  color: #E57373; /* Primary brand color for general links */
+  color: var(--primary-color); /* Use new primary color for links */
   text-decoration: inherit;
 }
 a:hover {
-  color: #D32F2F; /* Darker shade of primary for hover */
+  color: var(--secondary-color); /* Use new secondary color for link hover */
 }
 
 body {
