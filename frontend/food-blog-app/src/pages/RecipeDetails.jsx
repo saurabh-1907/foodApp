@@ -14,10 +14,13 @@ export default function RecipeDetails() {
             <h5>{recipe.email}</h5>
         </div>
         <h3 className='title'>{recipe.title}</h3>
-        <img src={`https://foodapp-7hu3.onrender.com/images/${recipe.coverImage}`} width="220px" height="200px"></img>
+        {recipe.coverImage ?
+            <img src={recipe.coverImage} width="220px" height="200px" alt={recipe.title} /> :
+            <img src={food} width="220px" height="200px" alt="Default recipe image" />
+        }
         <div className='recipe-details'>
-            <div className='ingredients'><h4>Ingredients</h4><ul>{recipe.ingredients.map(item=>(<li>{item}</li>))}</ul></div>
-            <div className='instructions'><h4>Instructions</h4><span>{recipe.instructions}</span></div>
+            <div className='ingredients'><h4>Ingredients</h4><ul>{recipe.ingredients.map((item, index)=>(<li key={index}>{item}</li>))}</ul></div>
+            <div className='instructions'><h4>Instructions</h4><p>{recipe.instructions}</p></div>
         </div>
     </div>
    </>

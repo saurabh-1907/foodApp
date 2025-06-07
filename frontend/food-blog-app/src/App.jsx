@@ -5,9 +5,9 @@ import Home from './pages/Home'
 import MainNavigation from './components/MainNavigation'
 import axios from 'axios'
 import  AddFoodRecipe  from './pages/AddFoodRecipe'
-import EditRecipe from './pages/EditRecipe'
-import RecipeDetails from './pages/RecipeDetails'
-
+import EditRecipe from './pages/EditRecipe';
+import RecipeDetails from './pages/RecipeDetails';
+// Removed ChatRoomPage import
 
 const getAllRecipes=async()=>{
   let allRecipes=[]
@@ -48,6 +48,7 @@ const router=createBrowserRouter([
     {path:"/addRecipe",element:<AddFoodRecipe/>},
     {path:"/editRecipe/:id",element:<EditRecipe/>},
     {path:"/recipe/:id",element:<RecipeDetails/>,loader:getRecipe}
+    // Removed ChatRoomPage route
   ]}
  
 ])

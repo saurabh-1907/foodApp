@@ -41,8 +41,11 @@ export default function RecipeItems() {
                 {
                     allRecipes?.map((item, index) => {
                         return (
-                            <div key={index} className='card'onDoubleClick={()=>navigate(`/recipe/${item._id}`)}>
-                                <img src={`https://foodapp-7hu3.onrender.com/images/${item.coverImage}`} width="120px" height="100px"></img>
+                            <div key={index} className='card' onDoubleClick={()=>navigate(`/recipe/${item._id}`)}>
+                                {item.coverImage ?
+                                    <img src={item.coverImage} width="120px" height="100px" alt={item.title} /> :
+                                    <img src={foodImg} width="120px" height="100px" alt="Default recipe image" />
+                                }
                                 <div className='card-body'>
                                     <div className='title'>{item.title}</div>
                                     <div className='icons'>

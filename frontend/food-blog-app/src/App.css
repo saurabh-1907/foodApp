@@ -16,7 +16,8 @@ header {
   position: fixed;
   top:0;
   z-index: 10;
-  background-color: #FFFFFF; /* Header background */
+  background-color: var(--primary-color);
+  color: var(--text-on-dark); /* Default text color for header elements */
 }
 
 header ul{
@@ -36,7 +37,7 @@ header ul li{
 }
 
 li a{
-  color: #333333; /* Nav links color */
+  color: var(--text-on-dark); /* Nav links color */
   transition: all 0.3s;
   padding:2px 10px;
   border-radius: 10px;
@@ -44,8 +45,8 @@ li a{
 }
 
 li a:hover{
-  color: #4DB6AC; /* Accent text color for hover */
-  background-color: #E0F2F1; /* Subtle accent background for hover */
+  color: var(--text-on-dark);
+  background-color: var(--secondary-color);
 }
 
 li .login{
@@ -55,7 +56,7 @@ li .login{
 
 header h2{
   margin-left: 1rem;
-  color: #E57373; /* Primary brand color for logo */
+  color: var(--text-on-dark); /* Logo text color, assuming it's part of header default */
 }
 
 section{
@@ -76,17 +77,19 @@ section{
 }
 
 .home button{
-  color: white;
+  color: var(--text-on-dark);
   border:none;
-  background-color: #E57373; /* Primary brand color for button */
+  background-color: var(--accent-pink);
   width: 200px;
   padding: 0.5rem;
-  border-radius: 0; /* Keeping this as it was, can be updated if needed */
+  border-radius: 0;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.home button:hover{ /* Specific hover for home button */
-  background-color: #D32F2F; /* Darker shade of primary */
+.home button:hover{
+  background-color: var(--primary-color); /* Using primary as hover for accent-pink */
+  filter: brightness(90%); /* Or a darker fixed shade of accent-pink if preferred */
 }
 
 /* Removing or commenting out .home a:hover as button styling is more specific now
@@ -106,8 +109,8 @@ section{
   /* If a specific path needs filling, a more specific selector might be needed */
 }
 
-.bg svg path { /* Attempting to target paths, might need adjustment based on SVG structure */
-  fill: #E0F2F1; /* Subtle background accent */
+.bg svg path {
+  fill: #B39DDB; /* Lighter variant of secondary-color for background wave */
 }
 
 .card-container{
@@ -120,13 +123,14 @@ section{
 }
 
 .card{
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); /* Adjusted shadow for potentially lighter bg */
   text-align: center;
   border-radius: 5px;
+  background-color: #FFFFFF; /* Ensure cards are white to stand out */
 }
 
 .card-body{
-  background-color: #FFFFFF; /* Cleaner card background */
+  background-color: transparent; /* Card itself is white, body is just for padding */
   padding: 1rem;
 }
 
@@ -134,7 +138,7 @@ section{
   margin-bottom:5px;
   font-size: 15px;
   font-weight:500;
-  color: #333333; /* Card title color */
+  color: var(--text-on-light);
 }
 
 .card-body .icons{
@@ -149,7 +153,7 @@ section{
   gap:2px;
   font-size: 13px;
   font-weight: 500;
-  color: #757575; /* Timer text color */
+  color: var(--text-on-light);
 }
 
 .action{
@@ -161,16 +165,16 @@ section{
 }
 
 .editIcon{
-  color: #4DB6AC; /* Accent color for edit icon */
+  color: var(--secondary-color);
   font-size: 18px;
 }
 
-.action a:hover{ /* For icons that are links, if any */
-  color: #26A69A; /* Darker accent for hover, consistent with other hovers */
+.action a:hover{
+  color: var(--primary-color);
 }
 
 .deleteIcon{
-  color: #EF5350; /* New delete red color */
+  color: var(--accent-pink);
   font-size: 20px;
   cursor: pointer;
 }
@@ -179,15 +183,16 @@ section{
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* Centering */
-  width: 90%; /* Responsive width */
-  max-width: 500px; /* Max width */
-  margin: auto; /* Centering for fallback if transform is not supported (rare) */
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 500px;
+  margin: auto;
   z-index: 10;
   padding: 2rem;
   border-radius: 6px;
   border:none;
-  background-color: #fff; /* Add a background color, common for modals */
+  background-color: #FFFFFF; /* Modal background */
+  color: var(--text-on-light); /* Text color inside modal */
 }
 
 .backdrop{
@@ -208,7 +213,7 @@ section{
 }
 
 .form-header{
-  background-color: #E0F2F1; /* Subtle accent for form header line */
+  background-color: var(--secondary-color); /* Form header line */
   height: 3px;
   text-align: center;
 }
@@ -222,44 +227,50 @@ section{
 
 .form-control .input{
   flex-basis: 70%;
-  border:1px solid rgb(156 163 175);
+  border:1px solid var(--secondary-color);
   border-radius: 4px;
   height: 30px;
   padding: 2px;
+  background-color: #FFFFFF; /* Ensure input backgrounds are white */
+  color: var(--text-on-light);
 }
 
 .form-control .input-textarea{
-  border: 1px solid rgb(156 163 175);
+  border: 1px solid var(--secondary-color);
   border-radius: 4px;
   flex-basis: 70%;
   padding: 2px;
+  background-color: #FFFFFF; /* Ensure textarea backgrounds are white */
+  color: var(--text-on-light);
 }
 
 .form button{
   margin:2rem 0;
   border:none;
-  background-color: #4DB6AC; /* Accent color for form button */
-  color: white; /* Text color for form button */
+  background-color: var(--accent-pink);
+  color: var(--text-on-dark);
   font-size: 14px;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
-  padding: 0.5rem 1rem; /* Added padding for better appearance */
+  padding: 0.5rem 1rem;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .form button:hover{
-  background-color: #26A69A; /* Darker accent for hover */
+  background-color: var(--primary-color); /* Using primary as hover for accent-pink */
+  filter: brightness(90%);
 }
 
-.form p{ /* Form links, e.g., "Already have an account?" */
+.form p{
   cursor: pointer;
   display: inline;
-  border-bottom: 1px solid #E57373; /* Primary brand color for border */
+  border-bottom: 1px solid var(--primary-color);
   font-size: 14px;
-  color: #E57373; /* Primary brand color for text */
+  color: var(--primary-color);
 }
 
 .form .error{
-  color:red;
+  color: #D32F2F; /* A more standard error red, can be a variable too */
   font-size: 13px;
 }
 .container{
@@ -282,8 +293,8 @@ section{
 .footer{
   width:100vw;
   height: 30px;
-  color: #F7F9F9; /* Light text for footer */
-  background-color: #333333; /* Dark grey for footer background */
+  color: var(--text-on-dark);
+  background-color: var(--primary-color);
   position: fixed;
   bottom: 0;
   text-align: center;
@@ -296,6 +307,17 @@ section{
   width: 90%; /* Changed width */
   max-width: 1200px; /* Added max-width */
   margin: 5rem auto; /* Adjusted margin */
+}
+
+/* Style for recipe image in RecipeDetails.jsx */
+.outer-container > img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1rem auto;
+  width: 220px; /* Default width, max-width handles smaller screens */
+  border-radius: 8px; /* Optional: add some rounding */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Optional: subtle shadow */
 }
 
 .outer-container .profile{
@@ -317,8 +339,8 @@ section{
 }
 
 .active{ /* For active nav links */
-  color: #4DB6AC !important; /* Accent text color */
-  background-color: #E0F2F1; /* Subtle accent background */
+  color: var(--text-on-dark) !important;
+  background-color: var(--secondary-color) !important; /* Ensure !important if overriding other specificities */
 }
 
 /* Media Queries for Responsiveness */
@@ -329,7 +351,7 @@ section{
   }
 
   header h2 {
-    margin-bottom: 0.5rem; /* Add some space below the logo */
+    margin-bottom: 0.25rem; /* Reduced margin */
   }
 
   header ul {
@@ -355,8 +377,12 @@ section{
   }
 
   .card-container {
-    width: 95%; /* Adjust width for smaller screens */
-    gap: 1.5rem; /* Reduce gap between cards */
+    width: 95%;
+    gap: 1.5rem;
+  }
+
+  .card { /* Adjust card padding on mobile if needed */
+    padding: 0.75rem;
   }
 
   .modal {
@@ -365,18 +391,31 @@ section{
   }
 
   .form-control {
-    flex-direction: column; /* Stack form elements */
+    flex-direction: column;
     gap: 0.5rem;
   }
 
   .form-control .input,
   .form-control .input-textarea {
-    width: 100%; /* Make form inputs take full width */
+    width: 100%;
+  }
+
+  .form button { /* Ensure form buttons have good tap size */
+    padding: 0.8em 1.2em;
   }
 
   .outer-container .recipe-details {
-    flex-direction: column; /* Stack recipe details */
+    flex-direction: column;
     gap: 1.5rem;
+  }
+
+  /* Responsive recipe image in RecipeDetails */
+  .outer-container > img {
+    width: 100%; /* Make it full width on mobile */
+  }
+
+  body { /* Example: Slightly increase line-height for body text on mobile */
+    line-height: 1.6;
   }
 }
 
