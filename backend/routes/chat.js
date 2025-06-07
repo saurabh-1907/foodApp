@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const chatController = require('../controller/chat');
-const { protect } = require('../middleware/auth'); // Assuming auth middleware is here
+const protect = require('../middleware/auth'); // Assuming auth middleware is here
 
 // POST /api/chat/room - Create a new chat room
 // For now, only authenticated users can create rooms.
