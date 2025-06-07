@@ -4,7 +4,7 @@ const User = require('../models/user'); // Assuming User model is in user.js
 const crypto = require('crypto');
 
 // Create a new chat room
-exports.createChatRoom = async (req, res) => {
+const createChatRoom = async (req, res) => {
     try {
         // Assuming req.user is populated by authentication middleware
         if (!req.user) {
@@ -26,26 +26,13 @@ exports.createChatRoom = async (req, res) => {
 };
 
 // Join a chat room
-exports.joinChatRoom = async (req, res) => {
-    try {
-        const { token } = req.body;
-        if (!token) {
-            return res.status(400).json({ message: 'Token is required' });
-        }
-
-        const room = await ChatRoom.findOne({ token: token });
-        if (!room) {
-            return res.status(404).json({ message: 'Chat room not found' });
-        }
-
-        res.status(200).json({ message: 'Successfully joined chat room', room });
-    } catch (error) {
-        res.status(500).json({ message: 'Error joining chat room', error: error.message });
-    }
+const enterChatRoom = async (req, res) => {
+    console.log('enterChatRoom (simplified) was called');
+    res.status(501).json({ message: 'enterChatRoom (simplified) - Original logic pending' });
 };
 
 // Get chat messages for a room
-exports.getChatMessages = async (req, res) => {
+const getChatMessages = async (req, res) => {
     try {
         const { roomId } = req.params;
         if (!roomId) {
@@ -63,7 +50,7 @@ exports.getChatMessages = async (req, res) => {
 };
 
 // Post a new chat message
-exports.postChatMessage = async (req, res) => {
+const postChatMessage = async (req, res) => {
     try {
         const { roomId } = req.params;
         const { message } = req.body;
@@ -89,4 +76,11 @@ exports.postChatMessage = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Error posting message', error: error.message });
     }
+};
+
+module.exports = {
+    createChatRoom,
+    enterChatRoom, // Renamed
+    getChatMessages,
+    postChatMessage
 };
