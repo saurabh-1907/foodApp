@@ -5,7 +5,7 @@ const crypto = require('crypto');
 
 const GENERAL_ROOM_ID = "GENERAL_CHAT_ROOM_001";
 
-// Create a new chat room (Async)
+// Create a new chat room (Async with original logic)
 const createChatRoom = async (req, res) => {
     try {
         if (!req.user) {
@@ -35,7 +35,7 @@ const enterChatRoom = (req, res) => {
     res.status(200).json({ message: 'Successfully hit enterChatRoom (synchronous test)', receivedToken: token });
 };
 
-// Get chat messages for a room (Async)
+// Get chat messages for a room (Async with original logic)
 const getChatMessages = async (req, res) => {
     try {
         const { roomId } = req.params;
@@ -51,7 +51,7 @@ const getChatMessages = async (req, res) => {
     }
 };
 
-// Post a new chat message (Async)
+// Post a new chat message (Async with original logic)
 const postChatMessage = async (req, res) => {
     try {
         const { roomId } = req.params;
@@ -78,6 +78,6 @@ const postChatMessage = async (req, res) => {
 module.exports = {
     createChatRoom,
     enterChatRoom,   // Simple sync version
-    getChatMessages,
+    getChatMessages, // Original async logic
     postChatMessage
 };
