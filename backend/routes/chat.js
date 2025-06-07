@@ -6,10 +6,12 @@ const { protect } = require('../middleware/auth'); // Assuming auth middleware i
 // POST /api/chat/room - Create a new chat room
 // For now, only authenticated users can create rooms.
 // Add admin check here if implemented: protect, adminCheck, chatController.createChatRoom
-router.post('/room', protect, chatController.createChatRoom);
 
-// POST /api/chat/join - Join a chat room
+// POST /api/chat/join - Join a chat room (MOVED TO THE TOP OF ROUTE DEFINITIONS)
 router.post('/join', protect, chatController.enterChatRoom);
+
+// POST /api/chat/room - Create a new chat room
+router.post('/room', protect, chatController.createChatRoom);
 
 // GET /api/chat/messages/:roomId - Get messages for a chat room
 router.get('/messages/:roomId', protect, chatController.getChatMessages);
