@@ -29,23 +29,17 @@ const createChatRoom = async (req, res) => {
 
 // Join a chat room
 const enterChatRoom = async (req, res) => {
-    try {
-        const { token } = req.body;
-        if (!token) {
-            return res.status(400).json({ message: 'Token is required' });
-        }
-
-        const room = await ChatRoom.findOne({ token: token }); // ChatRoom model should be defined in this file
-        if (!room) {
-            return res.status(404).json({ message: 'Chat room not found' });
-        }
-
-        // Ensure req.user is populated by 'protect' middleware if needed for further logic here
-        // For now, just joining by token is fine.
-        res.status(200).json({ message: 'Successfully joined chat room', room });
-    } catch (error) {
-        res.status(500).json({ message: 'Error joining chat room', error: error.message });
+    console.log("enterChatRoom CALLED (intermediate version)");
+    const { token } = req.body;
+    if (!token) {
+        return res.status(400).json({ message: 'Token is required (intermediate version)' });
     }
+    // Temporarily comment out DB interaction
+    // const room = await ChatRoom.findOne({ token: token });
+    // if (!room) {
+    //     return res.status(404).json({ message: 'Chat room not found (intermediate version)' });
+    // }
+    res.status(200).json({ message: 'Successfully hit enterChatRoom (intermediate version)', receivedToken: token });
 };
 
 // Get chat messages for a room
