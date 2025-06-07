@@ -5,8 +5,9 @@ import Home from './pages/Home'
 import MainNavigation from './components/MainNavigation'
 import axios from 'axios'
 import  AddFoodRecipe  from './pages/AddFoodRecipe'
-import EditRecipe from './pages/EditRecipe'
-import RecipeDetails from './pages/RecipeDetails'
+import EditRecipe from './pages/EditRecipe';
+import RecipeDetails from './pages/RecipeDetails';
+import ChatRoomPage from './pages/ChatRoomPage'; // Import ChatRoomPage
 
 
 const getAllRecipes=async()=>{
@@ -47,7 +48,8 @@ const router=createBrowserRouter([
     {path:"/favRecipe",element:<Home/>,loader:getFavRecipes},
     {path:"/addRecipe",element:<AddFoodRecipe/>},
     {path:"/editRecipe/:id",element:<EditRecipe/>},
-    {path:"/recipe/:id",element:<RecipeDetails/>,loader:getRecipe}
+    {path:"/recipe/:id",element:<RecipeDetails/>,loader:getRecipe},
+    {path:"/groups/:groupId/chat", element: <ChatRoomPage />} // Add ChatRoomPage route
   ]}
  
 ])
