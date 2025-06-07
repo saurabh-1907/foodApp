@@ -25,7 +25,7 @@ export default function Home() {
             <section className='home'>
                 <div className='left'>
                     <h1>Food Recipe</h1>
-                    <h5>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</h5>
+                    <p>Discover a world of culinary delights! Food is more than just sustenance; it's a journey of flavors, a way to connect with cultures, and a canvas for creativity. Share your own unique recipes and inspire others, or explore dishes from kitchens around the globe. Let's celebrate the art of cooking together!</p>
                     <button onClick={addRecipe}>Share your recipe</button>
                 </div>
                 <div className='right'>

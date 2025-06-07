@@ -118,14 +118,14 @@ section{
   margin: auto;
   display: grid;
   gap:2.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); /* Changed for flexibility */
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); /* Changed for flexibility */
   cursor:pointer
 }
 
 .card{
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); /* Adjusted shadow for potentially lighter bg */
   text-align: center;
-  border-radius: 5px;
+  border-radius: 10px;
   background-color: #FFFFFF; /* Ensure cards are white to stand out */
 }
 
@@ -419,5 +419,176 @@ section{
   }
 }
 
+/* Chat Page Styles */
+.chat-page-container {
+  max-width: 800px;
+  margin: 0 auto; /* Center the container */
+  padding: 20px;
+  margin-top: 60px; /* Account for fixed navbar */
+  margin-bottom: 40px; /* Account for fixed footer */
+}
+
+/* JoinChatRoom.jsx specific styles (example) */
+.join-chat-form-container {
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px;
+  margin: 20px auto;
+  background-color: #f9f9f9;
+}
+
+.join-chat-form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.join-chat-form-container input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  box-sizing: border-box; /* Ensures padding doesn't affect width */
+}
+
+.join-chat-form-container button {
+  width: 100%;
+  padding: 12px;
+  background-color: #5cb85c; /* Green */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.join-chat-form-container button:hover {
+  background-color: #4cae4c;
+}
+
+
+/* ChatInterface.jsx specific styles (example) */
+.chat-interface-container {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 70vh; /* Example height, adjust as needed */
+  background-color: #fff;
+}
+
+.chat-interface-container h3 {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  color: #333;
+  text-align: center;
+}
+
+.messages-list {
+  flex-grow: 1;
+  overflow-y: auto;
+  margin-bottom: 15px;
+  padding-right: 10px; /* For scrollbar */
+}
+
+.messages-list p { /* For "Loading messages..." or "No messages yet..." text */
+  text-align: center;
+  color: #777;
+  font-style: italic;
+}
+
+.send-message-form {
+  display: flex;
+  margin-top: 10px;
+}
+
+.send-message-form input[type="text"] {
+  flex-grow: 1;
+  padding: 12px;
+  border-radius: 20px; /* Rounded input */
+  border: 1px solid #ddd;
+  margin-right: 10px;
+}
+
+.send-message-form button {
+  padding: 10px 20px;
+  background-color: #007bff; /* Blue */
+  color: white;
+  border: none;
+  border-radius: 20px; /* Rounded button */
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.send-message-form button:hover {
+  background-color: #0056b3;
+}
+
+/* ChatMessageItem.jsx specific styles are mostly handled by inline styles for dynamic sender/receiver styling */
+/* However, you could add a base class style here if needed */
+.chat-message-item-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.message-bubble {
+  padding: 10px 15px;
+  border-radius: 18px;
+  max-width: 75%;
+  word-wrap: break-word;
+  font-size: 0.95em;
+  line-height: 1.4;
+}
+
+.message-sender-name {
+  font-size: 0.8em;
+  color: #555;
+  margin-bottom: 3px;
+}
+
+/* Differentiate current user's messages */
+.chat-message-item-container.current-user {
+  align-items: flex-end;
+}
+.chat-message-item-container.current-user .message-bubble {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Other users' messages */
+.chat-message-item-container.other-user {
+  align-items: flex-start;
+}
+.chat-message-item-container.other-user .message-bubble {
+  background-color: #e9e9eb;
+  color: black;
+}
+
+/* Button for 'Create New Chat Room' and 'Leave Room' on ChatPage.jsx */
+.chat-page-button {
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  background-color: #6c757d; /* Grey */
+  color: white;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.chat-page-button:hover {
+  background-color: #5a6268;
+}
+
+.chat-page-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
 
 
