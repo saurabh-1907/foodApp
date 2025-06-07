@@ -26,7 +26,7 @@ const createChatRoom = async (req, res) => {
 };
 
 // Join a chat room
-const joinChatRoom = async (req, res) => {
+const enterChatRoom = async (req, res) => { // Renamed
     try {
         const { token } = req.body;
         if (!token) {
@@ -93,7 +93,7 @@ const postChatMessage = async (req, res) => {
 
 module.exports = {
     createChatRoom,
-    joinChatRoom,
+    enterChatRoom, // Renamed
     getChatMessages,
     postChatMessage
 };
