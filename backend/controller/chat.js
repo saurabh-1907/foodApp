@@ -1,7 +1,9 @@
 const ChatRoom = require('../models/chatRoom');
 const ChatMessage = require('../models/chatMessage');
-const User = require('../models/user'); // Assuming User model is in user.js
+const FoodBlogUser = require("../models/user"); // Changed User to FoodBlogUser
 const crypto = require('crypto');
+
+const GENERAL_ROOM_ID = "GENERAL_CHAT_ROOM_001";
 
 // Create a new chat room
 const createChatRoom = async (req, res) => {
@@ -27,8 +29,23 @@ const createChatRoom = async (req, res) => {
 
 // Join a chat room
 const enterChatRoom = async (req, res) => {
-    console.log('enterChatRoom (simplified) was called');
-    res.status(501).json({ message: 'enterChatRoom (simplified) - Original logic pending' });
+    try {
+        const { token } = req.body;
+        if (!token) {
+            return res.status(400).json({ message: 'Token is required' });
+        }
+
+        const room = await ChatRoom.findOne({ token: token }); // ChatRoom model should be defined in this file
+        if (!room) {
+            return res.status(404).json({ message: 'Chat room not found' });
+        }
+
+        // Ensure req.user is populated by 'protect' middleware if needed for further logic here
+        // For now, just joining by token is fine.
+        res.status(200).json({ message: 'Successfully joined chat room', room });
+    } catch (error) {
+        res.status(500).json({ message: 'Error joining chat room', error: error.message });
+    }
 };
 
 // Get chat messages for a room
@@ -38,6 +55,11 @@ const getChatMessages = async (req, res) => {
         if (!roomId) {
             return res.status(400).json({ message: 'Room ID is required' });
         }
+
+        // For general room, no specific validation beyond checking the ID for now.
+        // For other rooms, one might add checks if the user is part of the room, etc.
+        // This basic implementation assumes if a user has a roomId, they can fetch messages.
+        // This is acceptable given current features.
 
         const messages = await ChatMessage.find({ roomId: roomId })
             .populate('userId', 'name') // Populate user's name, adjust fields as needed
@@ -61,6 +83,10 @@ const postChatMessage = async (req, res) => {
         if (!roomId || !message) {
             return res.status(400).json({ message: 'Room ID and message are required' });
         }
+
+        // User can post to GENERAL_ROOM_ID or any other room they might be part of.
+        // No specific "join" validation for GENERAL_ROOM_ID when posting,
+        // similar to getChatMessages. Authentication is the main check.
 
         const newMessage = new ChatMessage({
             roomId: roomId,

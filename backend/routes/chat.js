@@ -9,7 +9,7 @@ const { protect } = require('../middleware/auth'); // Assuming auth middleware i
 router.post('/room', protect, chatController.createChatRoom);
 
 // POST /api/chat/join - Join a chat room
-router.post('/join', chatController.enterChatRoom);
+router.post('/join', protect, chatController.enterChatRoom);
 
 // GET /api/chat/messages/:roomId - Get messages for a chat room
 router.get('/messages/:roomId', protect, chatController.getChatMessages);

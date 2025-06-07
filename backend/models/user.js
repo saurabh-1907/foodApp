@@ -12,4 +12,5 @@ const userSchema=mongoose.Schema({
     }
 },{timestamps:true})
 
-module.exports=mongoose.model("User",userSchema)
+const FoodBlogUser = mongoose.model("FoodBlogUser", userSchema);
+module.exports = FoodBlogUser;
