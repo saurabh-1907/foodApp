@@ -528,46 +528,59 @@ section{
   background-color: #0056b3;
 }
 
-/* ChatMessageItem.jsx specific styles are mostly handled by inline styles for dynamic sender/receiver styling */
-/* However, you could add a base class style here if needed */
-.chat-message-item-container {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
+/* ChatMessageItem.jsx specific styles */
+.message-item { /* Replaces .chat-message-item-container for alignment */
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px; /* Slightly more spacing */
 }
 
-.message-bubble {
-  padding: 10px 15px;
-  border-radius: 18px;
-  max-width: 75%;
-  word-wrap: break-word;
-  font-size: 0.95em;
-  line-height: 1.4;
+.message-item.current-user {
+    align-items: flex-end; /* Current user's messages align to the right */
 }
 
-.message-sender-name {
-  font-size: 0.8em;
-  color: #555;
-  margin-bottom: 3px;
+.message-item.other-user {
+    align-items: flex-start; /* Other users' messages align to the left */
 }
 
-/* Differentiate current user's messages */
-.chat-message-item-container.current-user {
-  align-items: flex-end;
+.message-sender-username {
+    display: block; /* Ensures it takes its own line if needed */
+    font-weight: bold;
+    margin-bottom: 3px; /* Space between username and bubble */
+    font-size: 0.85em; /* Slightly smaller */
+    color: #333; /* Darker for better readability */
 }
-.chat-message-item-container.current-user .message-bubble {
-  background-color: #007bff;
-  color: white;
+/* Optionally, different color for other users' names */
+.message-item.other-user .message-sender-username {
+    color: #0056b3; /* Example: a blue tone */
 }
 
-/* Other users' messages */
-.chat-message-item-container.other-user {
-  align-items: flex-start;
+
+.message-bubble { /* Styles for the message content bubble itself */
+    padding: 10px 15px;
+    border-radius: 18px;
+    max-width: 75%; /* Max width of bubble */
+    word-wrap: break-word; /* Prevent long words from overflowing */
+    font-size: 0.95em;
+    line-height: 1.4;
+    /* Background colors are set by inline styles in ChatMessageItem.jsx based on current user or other user */
 }
-.chat-message-item-container.other-user .message-bubble {
-  background-color: #e9e9eb;
-  color: black;
+
+
+.message-timestamp {
+    font-size: 0.75em; /* Slightly larger for readability */
+    color: #666; /* Lighter grey */
+    margin-top: 4px; /* Space between bubble and timestamp */
 }
+/* Align timestamp for current user */
+.message-item.current-user .message-timestamp {
+    align-self: flex-end;
+}
+/* Align timestamp for other users */
+.message-item.other-user .message-timestamp {
+    align-self: flex-start;
+}
+
 
 /* Button for 'Create New Chat Room' and 'Leave Room' on ChatPage.jsx */
 .chat-page-button {

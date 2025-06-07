@@ -5,6 +5,8 @@ import Navbar from '../components/Navbar'; // Assuming Navbar is used on this pa
 import Footer from '../components/Footer'; // Assuming Footer is used on this page
 import axios from 'axios';
 
+const GENERAL_ROOM_ID = "GENERAL_CHAT_ROOM_001"; // Added General Room ID
+
 const ChatPage = () => {
     const [currentRoom, setCurrentRoom] = useState(null); // Stores { id: roomId, name: roomName, token: roomToken }
     const [error, setError] = useState('');
@@ -90,17 +92,33 @@ const ChatPage = () => {
                 {!currentRoom ? (
                     <>
                         <JoinChatRoom onJoinSuccess={handleJoinSuccess} setError={setError} setIsLoading={setIsLoading} />
-                        <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                            <p>Or</p>
-                            <button onClick={() => createNewRoom()} disabled={isLoading} style={{padding: '10px 20px', cursor: 'pointer'}}>
-                                {isLoading ? 'Creating Room...' : 'Create a New Chat Room'}
+                        <div style={{ textAlign: 'center', marginTop: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
+                            <p>- Or -</p>
+                            <button
+                                onClick={() => handleJoinSuccess({ id: GENERAL_ROOM_ID, name: "General Chat", token: null })}
+                                disabled={isLoading}
+                                className="chat-page-button" // Using existing class for styling consistency
+                            >
+                                Join General Chat
+                            </button>
+                            <p>- Or -</p>
+                            <button
+                                onClick={() => createNewRoom()}
+                                disabled={isLoading}
+                                className="chat-page-button" // Using existing class for styling consistency
+                            >
+                                {isLoading ? 'Creating Private Room...' : 'Create a New Private Room'}
                             </button>
                         </div>
                     </>
                 ) : (
                     <div>
                         <ChatInterface roomId={currentRoom.id} roomName={currentRoom.name} userToken={user.token} />
-                        <button onClick={handleLeaveRoom} style={{ marginTop: '10px', padding: '10px', cursor: 'pointer' }}>
+                        <button
+                            onClick={handleLeaveRoom}
+                            className="chat-page-button" // Using existing class for styling consistency
+                            style={{ marginTop: '20px' }}
+                        >
                             Leave Room
                         </button>
                     </div>

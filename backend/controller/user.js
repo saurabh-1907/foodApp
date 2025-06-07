@@ -1,4 +1,4 @@
-const User = require("../models/user")
+const FoodBlogUser = require("../models/user")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 
@@ -7,12 +7,12 @@ const userSignUp = async (req, res) => {
     if (!email || !password) {
         return res.status(400).json({ message: "Email and password is required" })
     }
-    let user = await User.findOne({ email })
+    let user = await FoodBlogUser.findOne({ email })
     if (user) {
         return res.status(400).json({ error: "Email is already exist" })
     }
     const hashPwd = await bcrypt.hash(password, 10)
-    const newUser = await User.create({
+    const newUser = await FoodBlogUser.create({
         email, password: hashPwd
     })
     let token = jwt.sign({ email, id: newUser._id }, process.env.SECRET_KEY)
@@ -25,7 +25,7 @@ const userLogin = async (req, res) => {
     if (!email || !password) {
         return res.status(400).json({ message: "Email and password is required" })
     }
-    let user = await User.findOne({ email })
+    let user = await FoodBlogUser.findOne({ email })
     if (user && await bcrypt.compare(password, user.password)) {
         let token = jwt.sign({ email, id: user._id }, process.env.SECRET_KEY)
         return res.status(200).json({ token, user })
@@ -36,7 +36,7 @@ const userLogin = async (req, res) => {
 }
 
 const getUser = async (req, res) => {
-    const user = await User.findById(req.params.id)
+    const user = await FoodBlogUser.findById(req.params.id)
     res.json({email:user.email})
 }
 

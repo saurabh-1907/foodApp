@@ -1,68 +1,60 @@
 import React from 'react';
 
 const ChatMessageItem = ({ message, currentUserId }) => {
-    const isCurrentUser = message.userId?._id === currentUserId || message.userId === currentUserId;
-    // message.userId could be an object (populated) or a string (if not populated or from optimistic update)
-    // The backend populates userId with { _id, name }. So we check message.userId._id
+    // Ensure message and message.userId exist before trying to access properties
+    const userIdString = typeof message.userId === 'string' ? message.userId : message.userId?._id;
+    const isCurrentUser = userIdString === currentUserId;
 
-    const messageStyle = {
-        padding: '8px 12px',
-        borderRadius: '18px',
-        marginBottom: '8px',
-        maxWidth: '70%',
-        wordWrap: 'break-word',
-        fontSize: '0.9em',
-    };
+    const senderUsername = message.userId?.name || 'Unknown User';
 
-    const senderStyle = {
-        fontSize: '0.8em',
-        color: '#555',
-        marginBottom: '2px',
-    };
+    // Base class for the message item container
+    let itemClassName = 'message-item';
+    if (isCurrentUser) {
+        itemClassName += ' current-user'; // Used for alignment
+    } else {
+        itemClassName += ' other-user'; // Used for alignment
+    }
 
-    const containerStyle = {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: isCurrentUser ? 'flex-end' : 'flex-start',
-        marginBottom: '10px',
-    };
+    // Bubble class for actual message styling
+    let bubbleClassName = 'message-bubble';
+    // Inline styles for background color can be kept if preferred, or moved to CSS
+    // For simplicity, existing inline dynamic styles for bubble color are kept.
+    // CSS classes 'message-bubble-current-user' and 'message-bubble-other-user' could be used instead.
 
-    const userMessageStyle = {
-        ...messageStyle,
+     const userMessageStyle = {
         backgroundColor: '#007bff', // Blue for current user
         color: 'white',
-        alignSelf: 'flex-end',
     };
 
     const otherMessageStyle = {
-        ...messageStyle,
         backgroundColor: '#e9e9eb', // Light grey for others
         color: 'black',
-        alignSelf: 'flex-start',
     };
 
-    const getDisplayName = () => {
-        if (message.userId && message.userId.name) {
-            return message.userId.name;
-        }
-        return "User"; // Fallback if name is not available
-    };
 
     return (
-        <div style={containerStyle}>
+        <div className={itemClassName} style={{ marginBottom: '10px' }}>
+            {/* Display username for other users */}
             {!isCurrentUser && (
-                <div style={senderStyle}>
-                    {getDisplayName()}
-                </div>
+                <strong className="message-sender-username">
+                    {senderUsername}
+                </strong>
             )}
-            <div style={isCurrentUser ? userMessageStyle : otherMessageStyle}>
+            {/* Optional: Display username for current user as well */}
+            {/* {isCurrentUser && (
+                <strong className="message-sender-username" style={{ alignSelf: 'flex-end' }}>
+                    {senderUsername} // Or "You"
+                </strong>
+            )} */}
+            <div
+                className={bubbleClassName}
+                style={isCurrentUser ? userMessageStyle : otherMessageStyle}
+            >
                 {message.message}
             </div>
-             {/* Optional: Timestamp
-             <div style={{ fontSize: '0.7em', color: '#777', alignSelf: isCurrentUser ? 'flex-end' : 'flex-start', marginTop: '2px' }}>
+            <span className="message-timestamp" style={{ fontSize: '0.7em', color: '#777', marginTop: '2px' }}>
                 {new Date(message.timestamp).toLocaleTimeString()}
-            </div>
-            */}
+            </span>
         </div>
     );
 };
