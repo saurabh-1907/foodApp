@@ -26,22 +26,9 @@ const createChatRoom = async (req, res) => {
 };
 
 // Join a chat room
-const enterChatRoom = async (req, res) => { // Renamed
-    try {
-        const { token } = req.body;
-        if (!token) {
-            return res.status(400).json({ message: 'Token is required' });
-        }
-
-        const room = await ChatRoom.findOne({ token: token });
-        if (!room) {
-            return res.status(404).json({ message: 'Chat room not found' });
-        }
-
-        res.status(200).json({ message: 'Successfully joined chat room', room });
-    } catch (error) {
-        res.status(500).json({ message: 'Error joining chat room', error: error.message });
-    }
+const enterChatRoom = async (req, res) => {
+    console.log('enterChatRoom (simplified) was called');
+    res.status(501).json({ message: 'enterChatRoom (simplified) - Original logic pending' });
 };
 
 // Get chat messages for a room
