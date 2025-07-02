@@ -37,18 +37,9 @@ const enterChatRoom = (req, res) => {
 
 // Get chat messages for a room (Async with original logic)
 const getChatMessages = async (req, res) => {
-    try {
-        const { roomId } = req.params;
-        if (!roomId) {
-            return res.status(400).json({ message: 'Room ID is required' });
-        }
-        const messages = await ChatMessage.find({ roomId: roomId })
-            .populate('userId', 'name')
-            .sort({ timestamp: 'asc' });
-        res.status(200).json(messages);
-    } catch (error) {
-        res.status(500).json({ message: 'Error fetching messages', error: error.message });
-    }
+    console.log('getChatMessages (simplified) CALLED');
+    const { roomId } = req.params;
+    res.status(501).json({ message: 'getChatMessages (simplified) - Original logic pending', roomId: roomId });
 };
 
 // Post a new chat message (Async with original logic)
