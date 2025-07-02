@@ -5,26 +5,13 @@ const crypto = require('crypto');
 
 const GENERAL_ROOM_ID = "GENERAL_CHAT_ROOM_001";
 
-// Create a new chat room (Async with original logic)
+// createChatRoom (Simplified Async Placeholder)
 const createChatRoom = async (req, res) => {
-    try {
-        if (!req.user) {
-            return res.status(401).json({ message: 'User not authenticated' });
-        }
-        const token = crypto.randomBytes(16).toString('hex');
-        const newRoom = new ChatRoom({
-            name: req.body.name,
-            token: token,
-            adminUser: req.user.id
-        });
-        const savedRoom = await newRoom.save();
-        res.status(201).json(savedRoom);
-    } catch (error) {
-        res.status(500).json({ message: 'Error creating chat room', error: error.message });
-    }
+    console.log('createChatRoom (simplified) CALLED');
+    res.status(501).json({ message: 'createChatRoom (simplified) - Original logic pending' });
 };
 
-// enterChatRoom (Simplified Synchronous version for testing)
+// enterChatRoom (Simplified Synchronous Placeholder)
 const enterChatRoom = (req, res) => {
     console.log("enterChatRoom CALLED (synchronous test)");
     const { token } = req.body;
@@ -35,40 +22,24 @@ const enterChatRoom = (req, res) => {
     res.status(200).json({ message: 'Successfully hit enterChatRoom (synchronous test)', receivedToken: token });
 };
 
-// Get chat messages for a room (Async with original logic)
+// getChatMessages (Simplified Async Placeholder)
 const getChatMessages = async (req, res) => {
     console.log('getChatMessages (simplified) CALLED');
     const { roomId } = req.params;
     res.status(501).json({ message: 'getChatMessages (simplified) - Original logic pending', roomId: roomId });
 };
 
-// Post a new chat message (Async with original logic)
+// postChatMessage (Simplified Async Placeholder)
 const postChatMessage = async (req, res) => {
-    try {
-        const { roomId } = req.params;
-        const { message } = req.body;
-        if (!req.user) {
-            return res.status(401).json({ message: 'User not authenticated' });
-        }
-        if (!roomId || !message) {
-            return res.status(400).json({ message: 'Room ID and message are required' });
-        }
-        const newMessage = new ChatMessage({
-            roomId: roomId,
-            userId: req.user.id,
-            message: message
-        });
-        const savedMessage = await newMessage.save();
-        const populatedMessage = await ChatMessage.findById(savedMessage._id).populate('userId', 'name');
-        res.status(201).json(populatedMessage);
-    } catch (error) {
-        res.status(500).json({ message: 'Error posting message', error: error.message });
-    }
+    console.log('postChatMessage (simplified) CALLED');
+    const { roomId } = req.params;
+    const { message } = req.body;
+    res.status(501).json({ message: 'postChatMessage (simplified) - Original logic pending', roomId: roomId, message: message });
 };
 
 module.exports = {
     createChatRoom,
-    enterChatRoom,   // Simple sync version
-    getChatMessages, // Original async logic
+    enterChatRoom,
+    getChatMessages,
     postChatMessage
 };
