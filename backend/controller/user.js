@@ -36,8 +36,16 @@ const userLogin = async (req, res) => {
 }
 
 const getUser = async (req, res) => {
-    const user = await FoodBlogUser.findById(req.params.id)
-    res.json({email:user.email})
-}
+    try {
+        const user = await FoodBlogUser.findById(req.params.id);
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        res.json({ email: user.email }); // Consider returning other relevant, non-sensitive user fields if needed by frontend
+    } catch (error) {
+        console.error("Error in getUser:", error); // Log the actual error on the backend
+        res.status(500).json({ message: "Error fetching user data" });
+    }
+};
 
 module.exports = { userLogin, userSignUp, getUser }
