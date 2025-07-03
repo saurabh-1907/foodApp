@@ -14,7 +14,7 @@ export default function RecipeItems() {
     let favItems = JSON.parse(localStorage.getItem("fav")) ?? []
     const [isFavRecipe, setIsFavRecipe] = useState(false)
     const navigate=useNavigate()
-    console.log(allRecipes)
+    // console.log(allRecipes) // Content of allRecipes would be useful here to add more info
 
     useEffect(() => {
         setAllRecipes(recipes)
@@ -35,26 +35,40 @@ export default function RecipeItems() {
         setIsFavRecipe(pre => !pre)
     }
 
+    // Helper function to truncate text
+    const truncateText = (text, maxLength) => {
+        if (text && text.length > maxLength) {
+            return text.substring(0, maxLength) + "...";
+        }
+        return text;
+    };
+
     return (
         <>
             <div className='card-container'>
                 {
                     allRecipes?.map((item, index) => {
                         return (
-                            <div key={index} className='card' onDoubleClick={()=>navigate(`/recipe/${item._id}`)}>
+                            <div key={index} className='card' onClick={()=>navigate(`/recipe/${item._id}`)}>
                                 {item.coverImage ?
-                                    <img src={item.coverImage} width="200px" height="160px" alt={item.title} /> :
-                                    <img src={foodImg} width="200px" height="160px" alt="Default recipe image" />
+                                    <img src={item.coverImage} width="250px" height="200px" alt={item.title} style={{ objectFit: 'cover' }} /> :
+                                    <img src={foodImg} width="250px" height="200px" alt="Default recipe image" style={{ objectFit: 'cover' }} />
                                 }
                                 <div className='card-body'>
-                                    <div className='title'>{item.title}</div>
+                                    <div className='card-title'>{item.title}</div>
+                                    {/* Assuming item.instructions might be available for a short description */}
+                                    {item.instructions && (
+                                        <p className='card-description'>
+                                            {truncateText(item.instructions, 60)}
+                                        </p>
+                                    )}
                                     <div className='icons'>
                                         <div className='timer'><BsStopwatchFill />{item.time}</div>
-                                        {(!path) ? <FaHeart onClick={() => favRecipe(item)}
+                                        {(!path) ? <FaHeart onClick={(e) => { e.stopPropagation(); favRecipe(item); }}
                                             style={{ color: (favItems.some(res => res._id === item._id)) ? "red" : "" }} /> :
                                             <div className='action'>
-                                                <Link to={`/editRecipe/${item._id}`} className="editIcon"><FaEdit /></Link>
-                                                <MdDelete onClick={() => onDelete(item._id)} className='deleteIcon' />
+                                                <Link to={`/editRecipe/${item._id}`} onClick={(e) => e.stopPropagation()} className="editIcon"><FaEdit /></Link>
+                                                <MdDelete onClick={(e) => { e.stopPropagation(); onDelete(item._id);}} className='deleteIcon' />
                                             </div>
                                         }
                                     </div>

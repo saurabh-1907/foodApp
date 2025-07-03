@@ -118,27 +118,49 @@ section{
   margin: auto;
   display: grid;
   gap:2.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); /* Changed for flexibility */
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); /* Increased min card width */
   cursor:pointer
 }
 
 .card{
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); /* Adjusted shadow for potentially lighter bg */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   text-align: center;
   border-radius: 10px;
-  background-color: #FFFFFF; /* Ensure cards are white to stand out */
+  background-color: #FFFFFF;
+  display: flex; /* Added for better control over image and body */
+  flex-direction: column; /* Stack image and body vertically */
+  overflow: hidden; /* Ensures content respects border radius */
+}
+
+.card img {
+  width: 100%; /* Make image take full width of card */
+  height: 200px; /* Fixed height, adjust as needed, object-fit handles aspect ratio */
+  object-fit: cover; /* Ensures image covers the area, might crop */
 }
 
 .card-body{
-  background-color: transparent; /* Card itself is white, body is just for padding */
+  background-color: transparent;
   padding: 1rem;
+  flex-grow: 1; /* Allows card body to fill remaining space */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Pushes icons to the bottom */
 }
 
-.card-body .title{
-  margin-bottom:5px;
-  font-size: 15px;
-  font-weight:500;
+.card-body .card-title{ /* Changed from .title */
+  margin-bottom: 0.5rem; /* Adjusted margin */
+  font-size: 1.1rem; /* Increased font size */
+  font-weight: 600; /* Made bolder */
   color: var(--text-on-light);
+}
+
+.card-description {
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 0.75rem;
+  text-align: left;
+  line-height: 1.4;
+  flex-grow: 1; /* Allow description to take available space before icons */
 }
 
 .card-body .icons{
@@ -334,7 +356,7 @@ section{
 .outer-container .recipe-details{
   display: flex;
   gap: 3rem;
-  align-items: justify;
+  align-items: flex-start; /* Changed from 'justify' which is invalid for align-items */
   margin-top: 1rem;
 }
 
