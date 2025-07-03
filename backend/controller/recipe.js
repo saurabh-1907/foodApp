@@ -10,10 +10,26 @@ const getRecipes = async (req, res) => {
     return res.json(recipes)
 }
 
-const getRecipe=async(req,res)=>{
-    const recipe=await Recipes.findById(req.params.id)
-    res.json(recipe)
-}
+const getRecipe = async (req, res) => {
+    try {
+        const recipe = await Recipes.findById(req.params.id);
+        if (!recipe) {
+            // If no recipe is found, send a 404 status and a JSON message
+            return res.status(404).json({ message: "Recipe not found" });
+        }
+        // If recipe is found, send it (implicitly with a 200 OK status)
+        res.json(recipe);
+    } catch (error) {
+        // Handle other potential errors, like an invalid ID format for MongoDB
+        if (error.kind === 'ObjectId') {
+            return res.status(400).json({ message: 'Invalid recipe ID format' });
+        }
+        // Log the error for server-side debugging
+        console.error("Error in getRecipe controller:", error);
+        // Send a generic 500 server error status
+        res.status(500).json({ message: "Server error while fetching recipe" });
+    }
+};
 
 const addRecipe=async(req,res)=>{
     console.log(req.user)
