@@ -28,17 +28,30 @@ const getFavRecipes=()=>{
   return JSON.parse(localStorage.getItem("fav")) ?? []
 }
 
-const getRecipe=async({params})=>{
-  let recipe;
-  await axios.get(`https://foodapp-7hu3.onrender.com/recipe/${params.id}`)
-  .then(res=>recipe=res.data)
+const getRecipe = async ({ params }) => {
+  try {
+    const recipeRes = await axios.get(
+      `https://foodapp-7hu3.onrender.com/recipe/${params.id}`
+    )
+    const recipe = recipeRes.data
 
-  await axios.get(`https://foodapp-7hu3.onrender.com/user/${recipe.createdBy}`)
-  .then(res=>{
-    recipe={...recipe,email:res.data.email}
-  })
+    if (recipe?.createdBy) {
+      try {
+        const userRes = await axios.get(
+          `https://foodapp-7hu3.onrender.com/user/${recipe.createdBy}`
+        )
+        return { ...recipe, email: userRes.data.email }
+      } catch (err) {
+        console.error('Unable to fetch recipe author', err)
+        return { ...recipe, email: 'Unknown author' }
+      }
+    }
 
-  return recipe
+    return recipe
+  } catch (err) {
+    console.error('Unable to fetch recipe', err)
+    return null
+  }
 }
 
 const router=createBrowserRouter([

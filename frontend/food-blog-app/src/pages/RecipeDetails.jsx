@@ -3,7 +3,16 @@ import food from '../assets/foodRecipe.png'
 import { useLoaderData } from 'react-router-dom'
 
 export default function RecipeDetails() {
-    const recipe = useLoaderData() || {}
+    const recipe = useLoaderData()
+
+    if (!recipe) {
+        return (
+            <div className='outer-container'>
+                <h3 className='title'>Recipe not found</h3>
+            </div>
+        )
+    }
+
     const ingredients = recipe.ingredients || []
 
     return (
