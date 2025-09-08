@@ -9,16 +9,18 @@ export default function RecipeDetails() {
         return (
             <div className='outer-container'>
                 <h3 className='title'>Recipe not found</h3>
+
             </div>
         )
     }
-
     const ingredients = recipe.ingredients || []
+
 
     return (
         <>
             <div className='outer-container'>
                 <div className='profile'>
+
                     <img src={profileImg} width="50px" height="50px" alt="Author profile" />
                     <h5>{recipe.email || 'Unknown author'}</h5>
                 </div>
@@ -28,6 +30,7 @@ export default function RecipeDetails() {
                 ) : (
                     <img src={food} width="220px" height="200px" alt="Default recipe" />
                 )}
+
                 <div className='recipe-details'>
                     <div className='ingredients'>
                         <h4>Ingredients</h4>
@@ -39,7 +42,9 @@ export default function RecipeDetails() {
                     </div>
                     <div className='instructions'>
                         <h4>Instructions</h4>
+
                         <p>{recipe.instructions || 'No instructions provided.'}</p>
+
                     </div>
                 </div>
             </div>

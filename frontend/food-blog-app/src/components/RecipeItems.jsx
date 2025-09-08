@@ -9,10 +9,12 @@ import axios from 'axios';
 
 export default function RecipeItems() {
     const recipes = useLoaderData()
-    const [allRecipes, setAllRecipes] = useState()
+    const [allRecipes, setAllRecipes] = useState([])
     let path = window.location.pathname === "/myRecipe" ? true : false
     let favItems = JSON.parse(localStorage.getItem("fav")) ?? []
+
     const [, setIsFavRecipe] = useState(false)
+
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -38,13 +40,15 @@ export default function RecipeItems() {
         <>
             <div className='card-container'>
                 {
-                    allRecipes?.map((item, index) => {
+                    allRecipes.map((item, index) => {
                         return (
+
                             <div
                                 key={index}
                                 className='card'
                                 onClick={() => navigate(`/recipe/${item._id}`)}
                             >
+
                                 {item.coverImage ?
                                     <img src={item.coverImage} width="200px" height="160px" alt={item.title} /> :
                                     <img src={foodImg} width="200px" height="160px" alt="Default recipe image" />
