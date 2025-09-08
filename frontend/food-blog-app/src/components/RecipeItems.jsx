@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useLoaderData, useNavigate } from 'react-router-dom'
 import foodImg from '../assets/foodRecipe.png'
 import { BsStopwatchFill } from "react-icons/bs";
@@ -12,9 +12,8 @@ export default function RecipeItems() {
     const [allRecipes, setAllRecipes] = useState()
     let path = window.location.pathname === "/myRecipe" ? true : false
     let favItems = JSON.parse(localStorage.getItem("fav")) ?? []
-    const [isFavRecipe, setIsFavRecipe] = useState(false)
-    const navigate=useNavigate()
-    console.log(allRecipes)
+    const [, setIsFavRecipe] = useState(false)
+    const navigate = useNavigate()
 
     useEffect(() => {
         setAllRecipes(recipes)
@@ -41,7 +40,11 @@ export default function RecipeItems() {
                 {
                     allRecipes?.map((item, index) => {
                         return (
-                            <div key={index} className='card' onDoubleClick={()=>navigate(`/recipe/${item._id}`)}>
+                            <div
+                                key={index}
+                                className='card'
+                                onClick={() => navigate(`/recipe/${item._id}`)}
+                            >
                                 {item.coverImage ?
                                     <img src={item.coverImage} width="200px" height="160px" alt={item.title} /> :
                                     <img src={foodImg} width="200px" height="160px" alt="Default recipe image" />

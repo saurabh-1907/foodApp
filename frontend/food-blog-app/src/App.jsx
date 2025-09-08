@@ -1,4 +1,3 @@
-import React from 'react'
 import './App.css'
 import {createBrowserRouter,RouterProvider} from "react-router-dom"
 import Home from './pages/Home'
@@ -19,13 +18,14 @@ const getAllRecipes=async()=>{
 }
 
 const getMyRecipes=async()=>{
-  let user=JSON.parse(localStorage.getItem("user"))
-  let allRecipes=await getAllRecipes()
-  return allRecipes.filter(item=>item.createdBy===user._id)
+  let user = JSON.parse(localStorage.getItem("user"))
+  if (!user) return []
+  let allRecipes = await getAllRecipes()
+  return allRecipes.filter(item => item.createdBy === user._id)
 }
 
 const getFavRecipes=()=>{
-  return JSON.parse(localStorage.getItem("fav"))
+  return JSON.parse(localStorage.getItem("fav")) ?? []
 }
 
 const getRecipe=async({params})=>{
